@@ -96,10 +96,12 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  const moves:Array<number> = history.map((step, move:number) => {
+  const moves:Array<number> = history.map((step:any, move:number) => {
     const { row, col } = step.position || {};  // position が存在しない場合に備えて、デフォルト値を設定
     let description:string;
-    if (move === currentMove) {
+    if (move === currentMove && move == 0) {
+      description = "You are at move #" + move;
+    } else if (move === currentMove) {
       description = "You are at move #" + move+ ` (row: ${row}, col: ${col})`;
     } else if (move > 0) {
       description = 'Go to move #' + move + ` (row: ${row}, col: ${col})`;
